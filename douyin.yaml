@@ -1,0 +1,36 @@
+[YAML]
+# ================================================================
+# 策略组追加: 自动汇聚所有节点，支持切换或直连
+# ================================================================
+proxy-groups+:
+  - name: 抖音属地
+    type: select
+    proxies:
+      - DIRECT
+    include-all: true
+
+# ================================================================
+# 规则前置插入
+# ================================================================
++rules:
+  # ---【大流量媒体与 P2P 直连】---
+  - DOMAIN-SUFFIX,douyinvod.com,DIRECT      # 视频点播核心 CDN（占 90%+ 流量）
+  - DOMAIN-SUFFIX,idouyinvod.com,DIRECT     # 视频点播备份调度域名
+  - DOMAIN-SUFFIX,douyincdn.com,DIRECT      # 直播推拉流与低延迟流媒体
+  - DOMAIN-SUFFIX,douyinliving.com,DIRECT   # 抖音官方直播源站
+  - DOMAIN-SUFFIX,douyinpic.com,DIRECT      # 头像、封面大图 CDN
+  - DOMAIN-SUFFIX,douyinstatic.com,DIRECT   # 音乐、音频与静态静态库
+  - DOMAIN-SUFFIX,byteimg.com,DIRECT        # 聊天表情包与小图片资源
+  - DOMAIN-SUFFIX,bytecdn.com,DIRECT        # 视频滤镜与动效资源
+  - DOMAIN-SUFFIX,bytegecko.com,DIRECT      # 客户端离线包下发
+  - DOMAIN-SUFFIX,starrydyn.com,DIRECT      # P2P 种子调度与边缘 Tracker
+  - DOMAIN-SUFFIX,comfylink.com,DIRECT      # 边缘 PCDN 节点通信
+  - DOMAIN-SUFFIX,xdrtc.com,DIRECT          # 实时音视频与 WebRTC 打洞
+  - DOMAIN-KEYWORD,toutiaovod,DIRECT        # 头条系视频源点播分发
+
+  # ---【核心业务与发评 API 走代理】---
+  - DOMAIN-SUFFIX,amemv.com,抖音属地         # 核心发评、点赞与社交互动接口
+  - DOMAIN-KEYWORD,aweme,抖音属地            # Aweme 核心服务与移动长连接网关
+  - DOMAIN-SUFFIX,snssdk.com,抖音属地        # 用户中心鉴权与账号状态心跳
+  - DOMAIN-SUFFIX,zijieapi.com,抖音属地      # 字节 MSSDK 安全风控与设备上报
+  - DOMAIN-SUFFIX,douyin.com,抖音属地        # 抖音主站与综合业务 API 兜底
