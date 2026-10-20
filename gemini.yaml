@@ -1,0 +1,71 @@
+[YAML]
+# ================================================================
+# 策略组追加: Gemini 独立策略组
+# 默认置顶「节点选择」与「DIRECT」，汇聚所有机场节点，支持独立选路
+# ================================================================
+proxy-groups+:
+  - name: Gemini
+    type: select
+    proxies:
+      - 节点选择
+      - DIRECT
+    include-all: true
+
+# ================================================================
+# 规则前置插入 (覆盖 Gemini、Antigravity 与 Google AI 核心服务)
+# ================================================================
++rules:
+  # ---【Antigravity 编程智能体专有端点与调度网关】---
+  - DOMAIN,daily-cloudcode-pa.googleapis.com,Gemini      # Antigravity CLI/IDE 代码生成与模型调用核心通信端点
+  - DOMAIN,cloudcode-pa.googleapis.com,Gemini            # Cloud Code / Code Assist 模型服务
+  - DOMAIN-SUFFIX,antigravity.google,Gemini              # Antigravity 官方主站、文档与发布更新
+  - DOMAIN-SUFFIX,antigravity-unleash.goog,Gemini        # Antigravity 特性开关与调度配置
+  - DOMAIN,antigravity.googleapis.com,Gemini             # Antigravity API 网关
+  - DOMAIN,antigravity-pa.googleapis.com,Gemini          # Antigravity 生产服务通信通道
+  - DOMAIN,aicode.googleapis.com,Gemini                  # AI Code 补全与遥测通道
+  - DOMAIN,aida.googleapis.com,Gemini                    # Google AIDA 助手引擎后端
+  - DOMAIN,cloudaicompanion.googleapis.com,Gemini        # Cloud AI Companion 服务
+
+  # ---【Gemini Web 官方主站与交互界面】---
+  - DOMAIN-SUFFIX,gemini.google.com,Gemini               # Gemini Web 交互主站
+  - DOMAIN-SUFFIX,gemini.google,Gemini                   # Gemini 新通用顶级域
+  - DOMAIN-SUFFIX,bard.google.com,Gemini                 # Bard 历史重定向与兼容入口
+  - DOMAIN-SUFFIX,gemini.gstatic.com,Gemini              # Gemini 静态资源与前端依赖
+  - DOMAIN-SUFFIX,googlegemini.com,Gemini                # Google Gemini 官方跳转域名
+
+  # ---【Gemini API 开发者平台与模型接口】---
+  - DOMAIN,generativelanguage.googleapis.com,Gemini      # Gemini 核心 API（Python SDK/curl/第三方应用请求）
+  - DOMAIN-SUFFIX,ai.google.dev,Gemini                   # Gemini 开发者中心与文档平台
+  - DOMAIN-SUFFIX,ai.studio,Gemini                       # Google AI Studio 简短主域名
+  - DOMAIN,aistudio.google.com,Gemini                    # Google AI Studio 控制台
+  - DOMAIN,makersuite.google.com,Gemini                  # MakerSuite 控制台
+  - DOMAIN-SUFFIX,generativeai.google,Gemini             # Google 生成式 AI 官方展示站
+  - DOMAIN-SUFFIX,deepmind.com,Gemini                    # Google DeepMind 官网
+  - DOMAIN-SUFFIX,deepmind.google,Gemini                 # DeepMind Google 主页
+
+  # ---【Gemini 内部通信通道与客户端 RPC 网关】---
+  - DOMAIN,proactivebackend-pa.googleapis.com,Gemini     # Gemini 对话上下文流与后端通道
+  - DOMAIN,alkalicore-pa.clients6.google.com,Gemini      # Gemini 核心 RPC 网关
+  - DOMAIN,alkalimakersuite-pa.clients6.google.com,Gemini# AI Studio 交互通信
+  - DOMAIN,alkalireflect-pa.clients6.google.com,Gemini   # Gemini 评测与反馈通道
+  - DOMAIN,webchannel-alkalimakersuite-pa.clients6.google.com,Gemini # WebChannel 长连接通道
+  - DOMAIN,geminiweb-pa.clients.google.com,Gemini        # Gemini Web 客户端服务通道
+  - DOMAIN,geminiweb-pa.clients6.google.com,Gemini       # Gemini Web 客户端服务通道 (clients6)
+  - DOMAIN,waa-pa.clients6.google.com,Gemini             # Web & App Activity 验证通道
+
+  # ---【Google AI 关联创新平台 (NotebookLM / Labs 等)】---
+  - DOMAIN-SUFFIX,notebooklm.google,Gemini               # NotebookLM 主站
+  - DOMAIN,notebooklm.google.com,Gemini                  # NotebookLM 网页端
+  - DOMAIN,notebooklm.googleapis.com,Gemini              # NotebookLM API
+  - DOMAIN,notebooklm-pa.googleapis.com,Gemini           # NotebookLM 后端长连接
+  - DOMAIN-SUFFIX,labs.google,Gemini                     # Google Labs 实验平台
+  - DOMAIN,labs.google.com,Gemini                        # Google Labs 实验站
+  - DOMAIN,labstailwind.pa.googleapis.com,Gemini         # Labs Tailwind 实验后端
+  - DOMAIN-SUFFIX,jules.google,Gemini                    # Jules AI 编程代理
+  - DOMAIN-SUFFIX,opal.google,Gemini                     # Opal AI
+  - DOMAIN-SUFFIX,flow.google,Gemini                     # Flow AI
+  - DOMAIN-SUFFIX,stitch.withgoogle.com,Gemini           # Stitch 实验应用
+
+  # ---【兜底关键字规则】---
+  - DOMAIN-KEYWORD,antigravity,Gemini                    # Antigravity 关键字兜底
+  - DOMAIN-KEYWORD,generativelanguage,Gemini             # 开发者 API 关键字兜底
