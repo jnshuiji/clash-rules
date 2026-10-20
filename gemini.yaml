@@ -44,14 +44,14 @@ proxy-groups+:
   - DOMAIN-SUFFIX,deepmind.google,Gemini                 # DeepMind Google 主页
 
   # ---【Gemini 内部通信通道与客户端 RPC 网关】---
-  - DOMAIN,proactivebackend-pa.googleapis.com,Gemini     # Gemini 对话上下文流与后端通道
-  - DOMAIN,alkalicore-pa.clients6.google.com,Gemini      # Gemini 核心 RPC 网关
-  - DOMAIN,alkalimakersuite-pa.clients6.google.com,Gemini# AI Studio 交互通信
-  - DOMAIN,alkalireflect-pa.clients6.google.com,Gemini   # Gemini 评测与反馈通道
-  - DOMAIN,webchannel-alkalimakersuite-pa.clients6.google.com,Gemini # WebChannel 长连接通道
-  - DOMAIN,geminiweb-pa.clients.google.com,Gemini        # Gemini Web 客户端服务通道
-  - DOMAIN,geminiweb-pa.clients6.google.com,Gemini       # Gemini Web 客户端服务通道 (clients6)
-  - DOMAIN,waa-pa.clients6.google.com,Gemini             # Web & App Activity 验证通道
+  - DOMAIN,proactivebackend-pa.googleapis.com,Gemini                # Gemini 对话上下文流与后端通道
+  - DOMAIN,alkalicore-pa.clients6.google.com,Gemini                 # Gemini 核心 RPC 网关
+  - DOMAIN,alkalimakersuite-pa.clients6.google.com,Gemini           # AI Studio 交互通信
+  - DOMAIN,alkalireflect-pa.clients6.google.com,Gemini              # Gemini 评测与反馈通道
+  - DOMAIN,webchannel-alkalimakersuite-pa.clients6.google.com,Gemini  # WebChannel 长连接通道
+  - DOMAIN,geminiweb-pa.clients.google.com,Gemini                   # Gemini Web 客户端服务通道
+  - DOMAIN,geminiweb-pa.clients6.google.com,Gemini                  # Gemini Web 客户端服务通道 (clients6)
+  - DOMAIN,waa-pa.clients6.google.com,Gemini                        # Web & App Activity 验证通道
 
   # ---【Google AI 关联创新平台 (NotebookLM / Labs 等)】---
   - DOMAIN-SUFFIX,notebooklm.google,Gemini               # NotebookLM 主站
